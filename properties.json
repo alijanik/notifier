@@ -1,0 +1,380 @@
+{
+  "timer": {
+    "runEveryXSeconds": 120,
+    "runSlowerEveryXSeconds": 3600,
+    "slowerFromHour": 23,
+    "slowerToHour": 5
+  },
+  "webDriverType": "webdriver.chrome.driver",
+  "webDriverAddress": "chromedriver/chromedriver",
+  "outputDirectory": "output",
+  "email": {
+    "subject": "New update",
+    "content": "Here the new update",
+    "host": "smtp.gmail.com",
+    "port": 465,
+    "username": "your_email@gmail.com",
+    "password": "Go here: https://support.google.com/mail/thread/205453566/how-to-generate-an-app-password?hl=en",
+    "to": [
+      "my_email@sth.com",
+      "my_wife_email@sth.com"
+    ]
+  },
+  "sites": [
+    {
+      "name": "Pararius",
+      "useDriver": false,
+      "url": "https://www.pararius.com",
+      "path": "/apartments/utrecht/0-1600/2-rooms",
+      "start": "<h2 class=\"listing-search-item__title\">",
+      "finish": "</section",
+      "createUniqueKeyFrom": [
+        "items.postalCode",
+        "items.cost",
+        "items.area"
+      ],
+      "doActionIf": "items.price >= 1000 and items.specifications not contain '---'",
+      "items": [
+        {
+          "name": "Title",
+          "start": "<h2 class=\"listing-search-item__title\">",
+          "finish": "</h2>"
+        },
+        {
+          "name": "Link",
+          "start": "<h2 class=\"listing-search-item__title\">",
+          "finish": "</h2>",
+          "extracts": [
+            {
+              "name": "Link",
+              "type": "Link"
+            }
+          ]
+        },
+        {
+          "name": "SubTitle",
+          "start": "<div class=\"listing-search-item__sub-title'\">",
+          "finish": "</div>",
+          "extracts": [
+            {
+              "name": "postalCode",
+              "type": "PostalCode",
+              "show": false
+            }
+          ]
+        },
+        {
+          "name": "Price",
+          "start": "<div class=\"listing-search-item__price\">",
+          "finish": "</div>",
+          "extracts": [
+            {
+              "name": "cost",
+              "type": "Price",
+              "show": false
+            }
+          ]
+        },
+        {
+          "name": "Specifications",
+          "start": "<ul class=\"illustrated-features illustrated-features--compact\">",
+          "finish": "</ul>",
+          "extracts": [
+            {
+              "name": "area",
+              "type": "Area",
+              "show": false
+            }
+          ]
+        },
+        {
+          "name": "Info",
+          "start": "<div class=\"listing-search-item__info\">",
+          "finish": "</div>"
+        }
+      ],
+      "action": {
+        "urlFrom": "items.Link",
+        "waitFor": {
+          "findElement" : "Contact the estate agent",
+          "by" : "LinkText",
+          "waitSeconds": 5
+        },
+        "startWith": [
+          {
+            "name": "accept cookies",
+            "skipWhenNotFound": true,
+            "findElement": "onetrust-accept-btn-handler",
+            "by" : "Id",
+            "waitSeconds": 5,
+            "action": "click"
+          }
+        ],
+        "thenDo": [
+          {
+            "name": "Click on Plan a viewing",
+            "findElement": "Plan a viewing",
+            "by" : "LinkText",
+            "waitSeconds": 1,
+            "action": "click"
+          },
+          {
+            "name": "Write message to the agent",
+            "findElement": "/html/body/div[3]/div/div[1]/form/fieldset[1]/div[1]/div/textarea",
+            "by" : "XPath",
+            "waitSeconds": 1,
+            "action": "Fill",
+            "value": "Hi, I'm Alijanik"
+          },
+          {
+            "name": "Check Monday",
+            "findElement": "/html/body/div[3]/div/div[1]/form/fieldset[1]/div[2]/wc-choice-control/div/wc-checkbox-control[1]",
+            "by" : "XPath",
+            "waitSeconds": 1,
+            "action": "click"
+          },
+          {
+            "name": "Check Tuesday",
+            "findElement": "/html/body/div[3]/div/div[1]/form/fieldset[1]/div[2]/wc-choice-control/div/wc-checkbox-control[2]",
+            "by" : "XPath",
+            "waitSeconds": 1,
+            "action": "click"
+          },
+          {
+            "name": "Check Wednesday",
+            "findElement": "/html/body/div[3]/div/div[1]/form/fieldset[1]/div[2]/wc-choice-control/div/wc-checkbox-control[3]",
+            "by" : "XPath",
+            "waitSeconds": 1,
+            "action": "click"
+          },
+          {
+            "name": "Check Thursday",
+            "findElement": "/html/body/div[3]/div/div[1]/form/fieldset[1]/div[2]/wc-choice-control/div/wc-checkbox-control[4]",
+            "by" : "XPath",
+            "waitSeconds": 1,
+            "action": "click"
+          },
+          {
+            "name": "Check Friday",
+            "findElement": "/html/body/div[3]/div/div[1]/form/fieldset[1]/div[2]/wc-choice-control/div/wc-checkbox-control[5]",
+            "by" : "XPath",
+            "waitSeconds": 1,
+            "action": "click"
+          },
+          {
+            "name": "Check Morning",
+            "findElement": "/html/body/div[3]/div/div[1]/form/fieldset[1]/div[3]/wc-choice-control/div/wc-checkbox-control[1]",
+            "by" : "XPath",
+            "waitSeconds": 1,
+            "action": "click"
+          },
+          {
+            "name": "Check Afternoon",
+            "findElement": "/html/body/div[3]/div/div[1]/form/fieldset[1]/div[3]/wc-choice-control/div/wc-checkbox-control[2]",
+            "by" : "XPath",
+            "waitSeconds": 1,
+            "action": "click"
+          }
+        ],
+        "elseDo": [
+          {
+            "findElement": "Contact the estate agent",
+            "by": "LinkText",
+            "waitSeconds": 1,
+            "action": "click"
+          },
+          {
+            "name": "Write message to the agent",
+            "findElement": "/html/body/div[3]/div/div[1]/form/fieldset[1]/div/div/textarea",
+            "by" : "XPath",
+            "waitSeconds": 1,
+            "action": "Fill",
+            "value": "Hi, I'm Alijanik"
+          }
+        ],
+        "finishWith": [
+          {
+            "name": "Fill FirstName",
+            "findElement": "/html/body/div[3]/div/div[1]/form/fieldset[2]/div[1]/div/div/input",
+            "by" : "XPath",
+            "waitSeconds": 1,
+            "action": "fill",
+            "value": "My first name"
+          },
+          {
+            "name": "Fill LastName",
+            "findElement": "/html/body/div[3]/div/div[1]/form/fieldset[2]/div[2]/div/div/input",
+            "by" : "XPath",
+            "waitSeconds": 1,
+            "action": "fill",
+            "value": "My last name"
+          },
+          {
+            "name": "Fill Email Address",
+            "findElement": "/html/body/div[3]/div/div[1]/form/fieldset[2]/div[3]/div/div/input",
+            "by" : "XPath",
+            "waitSeconds": 1,
+            "action": "fill",
+            "value": "my.email@gmail.com"
+          },
+          {
+            "name": "Fill Phone",
+            "findElement": "/html/body/div[3]/div/div[1]/form/fieldset[2]/div[4]/div/div/input",
+            "by" : "XPath",
+            "waitSeconds": 1,
+            "action": "fill",
+            "value": "+31123456789"
+          },
+          {
+            "name": "Submit the data",
+            "findElement": "/html/body/div[3]/div/div[1]/form/div[2]/REMOVE_button_REMOVE",
+            "by" : "XPath",
+            "waitSeconds": 1,
+            "action": "submit"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Funda",
+      "useDriver": false,
+      "url": "https://www.funda.nl",
+      "path": "/zoeken/huur?selected_area=%5B%22utrecht%22%5D&price=%22-1600%22&rooms=%222-%22",
+      "start": "<div class=\"border-light-2 mb-4 border-b pb-4\"><div data-test-id=\"search-result-item\"",
+      "finish": "</div> <!----> <!----></div>",
+      "createUniqueKeyFrom": [
+        "items.postalCode",
+        "items.cost",
+        "items.area"
+      ],
+      "items": [
+        {
+          "name": "Title",
+          "start": "<div class=\"min-w-0\" data-v-6f963a4f",
+          "finish": "</h2>"
+        },
+        {
+          "name": "Link",
+          "start": "<div class=\"min-w-0\" data-v-6f963a4f",
+          "finish": "</h2>",
+          "extracts": [
+            {
+              "name": "Link",
+              "type": "Link"
+            }
+          ]
+        },
+        {
+          "name": "SubTitle",
+          "start": "<div data-test-id=\"postal-code-city\"",
+          "finish": "</div>",
+          "extracts": [
+            {
+              "name": "postalCode",
+              "type": "PostalCode",
+              "show": false
+            }
+          ]
+        },
+        {
+          "name": "Price",
+          "start": "<p data-test-id=\"price-rent\"",
+          "finish": "</p>",
+          "extracts": [
+            {
+              "name": "cost",
+              "type": "Price",
+              "show": false
+            }
+          ]
+        },
+        {
+          "name": "Specifications",
+          "start": "<ul class=\"mt-1 flex h-6 min-w-0 flex-wrap overflow-hidden\">",
+          "finish": "</ul>",
+          "extracts": [
+            {
+              "name": "area",
+              "type": "Area",
+              "show": false
+            }
+          ]
+        },
+        {
+          "name": "Info",
+          "start": "<div class=\"mt-4 flex\" data-v-6f963a4f",
+          "finish": "</div>"
+        }
+      ]
+    },
+    {
+      "name": "Hollan2Stay",
+      "useDriver": true,
+      "url": "https://holland2stay.com/residences",
+      "path": "?page=1&city%5Bfilter%5D=Utrecht%2C27&price%5Bfilter%5D=500-1600%2C500_1600",
+      "queryParams": {},
+      "start": "<div class=\"residence_block\">",
+      "finish": "<div class=\"residence_block\">",
+      "items": [
+        {
+          "name": "Title",
+          "start": "<h5 class=\"residence_name\">",
+          "finish": "</h5>"
+        },
+        {
+          "name": "Link",
+          "start": "<h5 class=\"residence_name\">",
+          "finish": "</h5>",
+          "extracts": [
+            {
+              "name": "Link",
+              "type": "Link"
+            }
+          ]
+        },
+        {
+          "name": "SubTitle",
+          "start": "<div class=\"listing-search-item__sub-title'\">",
+          "finish": "</div>",
+          "extracts": [
+            {
+              "name": "postalCode",
+              "type": "PostalCode",
+              "show": false
+            }
+          ]
+        },
+        {
+          "name": "Price",
+          "start": "<h4 class=\"price_text\">",
+          "finish": "</h4>",
+          "extracts": [
+            {
+              "name": "cost",
+              "type": "Price",
+              "show": false
+            }
+          ]
+        },
+        {
+          "name": "Specifications",
+          "start": "<div class=\"features\">",
+          "finish": "</div>",
+          "extracts": [
+            {
+              "name": "area",
+              "type": "Area",
+              "show": false
+            }
+          ]
+        },
+        {
+          "name": "Info",
+          "start": "<div class=\"listing-search-item__info\">",
+          "finish": "</div>"
+        }
+      ]
+    }
+  ]
+}
+

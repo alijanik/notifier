@@ -1,0 +1,8 @@
+.idea
+.github
+.DS_Store
+notifier.iml
+
+target
+output
+chromedriver
