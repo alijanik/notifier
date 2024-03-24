@@ -2,10 +2,10 @@ package com.alijanik.notifier.common.downloader;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.alijanik.notifier.common.driver.WebDriverFactory;
 
 import java.time.Duration;
 
@@ -19,8 +19,7 @@ public class WebDownloader implements DownloaderInterface {
     }
 
     private void open() {
-        ChromeOptions options = new ChromeOptions();
-        driver = new ChromeDriver(options);
+        driver = WebDriverFactory.getDriver();
     }
 
     public void close() {
