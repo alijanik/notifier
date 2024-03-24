@@ -240,7 +240,7 @@
       "useDriver": false,
       "url": "https://www.funda.nl",
       "path": "/zoeken/huur?selected_area=%5B%22utrecht%22%5D&price=%22-1600%22&rooms=%222-%22",
-      "start": "<div class=\"border-light-2 mb-4 border-b pb-4\"><div data-test-id=\"search-result-item\"",
+      "start": "\"><div data-test-id=\"search-result-item\"",
       "finish": "</div> <!----> <!----></div>",
       "createUniqueKeyFrom": [
         "items.postalCode",
@@ -250,12 +250,12 @@
       "items": [
         {
           "name": "Title",
-          "start": "<div class=\"min-w-0\" data-v-6f963a4f",
+          "start": "<a href=\"",
           "finish": "</h2>"
         },
         {
           "name": "Link",
-          "start": "<div class=\"min-w-0\" data-v-6f963a4f",
+          "start": "<a href=\"",
           "finish": "</h2>",
           "extracts": [
             {
@@ -302,7 +302,7 @@
         },
         {
           "name": "Info",
-          "start": "<div class=\"mt-4 flex\" data-v-6f963a4f",
+          "start": "<div class=\"mt-4 flex\"",
           "finish": "</div>"
         }
       ]
