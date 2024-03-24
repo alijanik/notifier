@@ -5,8 +5,12 @@
     "slowerFromHour": 23,
     "slowerToHour": 5
   },
-  "webDriverType": "webdriver.chrome.driver",
-  "webDriverAddress": "chromedriver/chromedriver",
+  "browserType": "chrome",
+  "webDrivers": {
+    "webdriver.chrome.driver": "chromedriver/chromedriver",
+    "webdriver.gecko.driver": "/usr/bin/firefox",
+    "webdriver.edge.driver": "/path/to/edgedriver"
+  },
   "outputDirectory": "output",
   "email": {
     "subject": "New update",

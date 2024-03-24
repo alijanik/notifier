@@ -2,11 +2,10 @@ package com.alijanik.notifier.site;
 
 import com.alijanik.notifier.config.ConfigSiteAction;
 import com.alijanik.notifier.config.ConfigSiteActionPart;
+import com.alijanik.notifier.common.driver.WebDriverFactory;
 import com.alijanik.notifier.common.logger.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -23,8 +22,7 @@ public class Action {
     }
 
     public void open() {
-        ChromeOptions options = new ChromeOptions();
-        this.driver = new ChromeDriver(options);
+        this.driver = WebDriverFactory.getDriver();
     }
 
     public void close() {
